@@ -35,12 +35,14 @@
             this.lbl_temps = new System.Windows.Forms.Label();
             this.txt_temps = new System.Windows.Forms.TextBox();
             this.gb_reponses = new System.Windows.Forms.GroupBox();
-            this.cbox_rep1 = new System.Windows.Forms.CheckBox();
-            this.cbox_rep2 = new System.Windows.Forms.CheckBox();
-            this.cbox_rep3 = new System.Windows.Forms.CheckBox();
-            this.cbox_rep4 = new System.Windows.Forms.CheckBox();
             this.cbox_rep5 = new System.Windows.Forms.CheckBox();
+            this.cbox_rep4 = new System.Windows.Forms.CheckBox();
+            this.cbox_rep3 = new System.Windows.Forms.CheckBox();
+            this.cbox_rep2 = new System.Windows.Forms.CheckBox();
+            this.cbox_rep1 = new System.Windows.Forms.CheckBox();
+            this.pb_img = new System.Windows.Forms.PictureBox();
             this.gb_reponses.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_img)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_titre
@@ -60,6 +62,7 @@
             this.txt_question.Location = new System.Drawing.Point(28, 118);
             this.txt_question.Multiline = true;
             this.txt_question.Name = "txt_question";
+            this.txt_question.ReadOnly = true;
             this.txt_question.Size = new System.Drawing.Size(546, 79);
             this.txt_question.TabIndex = 3;
             // 
@@ -95,8 +98,10 @@
             // txt_temps
             // 
             this.txt_temps.BackColor = System.Drawing.SystemColors.Control;
+            this.txt_temps.Enabled = false;
             this.txt_temps.Location = new System.Drawing.Point(620, 70);
             this.txt_temps.Name = "txt_temps";
+            this.txt_temps.ReadOnly = true;
             this.txt_temps.Size = new System.Drawing.Size(168, 20);
             this.txt_temps.TabIndex = 7;
             // 
@@ -114,35 +119,15 @@
             this.gb_reponses.TabStop = false;
             this.gb_reponses.Text = "Réponses possibles";
             // 
-            // cbox_rep1
+            // cbox_rep5
             // 
-            this.cbox_rep1.AutoSize = true;
-            this.cbox_rep1.Location = new System.Drawing.Point(6, 19);
-            this.cbox_rep1.Name = "cbox_rep1";
-            this.cbox_rep1.Size = new System.Drawing.Size(78, 17);
-            this.cbox_rep1.TabIndex = 0;
-            this.cbox_rep1.Text = "Réponse 1";
-            this.cbox_rep1.UseVisualStyleBackColor = true;
-            // 
-            // cbox_rep2
-            // 
-            this.cbox_rep2.AutoSize = true;
-            this.cbox_rep2.Location = new System.Drawing.Point(6, 52);
-            this.cbox_rep2.Name = "cbox_rep2";
-            this.cbox_rep2.Size = new System.Drawing.Size(78, 17);
-            this.cbox_rep2.TabIndex = 1;
-            this.cbox_rep2.Text = "Réponse 2";
-            this.cbox_rep2.UseVisualStyleBackColor = true;
-            // 
-            // cbox_rep3
-            // 
-            this.cbox_rep3.AutoSize = true;
-            this.cbox_rep3.Location = new System.Drawing.Point(6, 90);
-            this.cbox_rep3.Name = "cbox_rep3";
-            this.cbox_rep3.Size = new System.Drawing.Size(78, 17);
-            this.cbox_rep3.TabIndex = 2;
-            this.cbox_rep3.Text = "Réponse 3";
-            this.cbox_rep3.UseVisualStyleBackColor = true;
+            this.cbox_rep5.AutoSize = true;
+            this.cbox_rep5.Location = new System.Drawing.Point(6, 170);
+            this.cbox_rep5.Name = "cbox_rep5";
+            this.cbox_rep5.Size = new System.Drawing.Size(78, 17);
+            this.cbox_rep5.TabIndex = 4;
+            this.cbox_rep5.Text = "Réponse 5";
+            this.cbox_rep5.UseVisualStyleBackColor = true;
             // 
             // cbox_rep4
             // 
@@ -154,15 +139,45 @@
             this.cbox_rep4.Text = "Réponse 4";
             this.cbox_rep4.UseVisualStyleBackColor = true;
             // 
-            // cbox_rep5
+            // cbox_rep3
             // 
-            this.cbox_rep5.AutoSize = true;
-            this.cbox_rep5.Location = new System.Drawing.Point(6, 170);
-            this.cbox_rep5.Name = "cbox_rep5";
-            this.cbox_rep5.Size = new System.Drawing.Size(78, 17);
-            this.cbox_rep5.TabIndex = 4;
-            this.cbox_rep5.Text = "Réponse 5";
-            this.cbox_rep5.UseVisualStyleBackColor = true;
+            this.cbox_rep3.AutoSize = true;
+            this.cbox_rep3.Location = new System.Drawing.Point(6, 90);
+            this.cbox_rep3.Name = "cbox_rep3";
+            this.cbox_rep3.Size = new System.Drawing.Size(78, 17);
+            this.cbox_rep3.TabIndex = 2;
+            this.cbox_rep3.Text = "Réponse 3";
+            this.cbox_rep3.UseVisualStyleBackColor = true;
+            // 
+            // cbox_rep2
+            // 
+            this.cbox_rep2.AutoSize = true;
+            this.cbox_rep2.Location = new System.Drawing.Point(6, 52);
+            this.cbox_rep2.Name = "cbox_rep2";
+            this.cbox_rep2.Size = new System.Drawing.Size(78, 17);
+            this.cbox_rep2.TabIndex = 1;
+            this.cbox_rep2.Text = "Réponse 2";
+            this.cbox_rep2.UseVisualStyleBackColor = true;
+            // 
+            // cbox_rep1
+            // 
+            this.cbox_rep1.AutoSize = true;
+            this.cbox_rep1.Location = new System.Drawing.Point(6, 19);
+            this.cbox_rep1.Name = "cbox_rep1";
+            this.cbox_rep1.Size = new System.Drawing.Size(78, 17);
+            this.cbox_rep1.TabIndex = 0;
+            this.cbox_rep1.Text = "Réponse 1";
+            this.cbox_rep1.UseVisualStyleBackColor = true;
+            // 
+            // pb_img
+            // 
+            this.pb_img.Image = global::QUIZ.Properties.Resources.Interrogation;
+            this.pb_img.Location = new System.Drawing.Point(620, 118);
+            this.pb_img.Name = "pb_img";
+            this.pb_img.Size = new System.Drawing.Size(168, 154);
+            this.pb_img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_img.TabIndex = 9;
+            this.pb_img.TabStop = false;
             // 
             // Jeu
             // 
@@ -170,6 +185,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.pb_img);
             this.Controls.Add(this.gb_reponses);
             this.Controls.Add(this.txt_temps);
             this.Controls.Add(this.lbl_temps);
@@ -181,6 +197,7 @@
             this.Text = "Jeu";
             this.gb_reponses.ResumeLayout(false);
             this.gb_reponses.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_img)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,5 +217,6 @@
         private System.Windows.Forms.CheckBox cbox_rep3;
         private System.Windows.Forms.CheckBox cbox_rep2;
         private System.Windows.Forms.CheckBox cbox_rep1;
+        private System.Windows.Forms.PictureBox pb_img;
     }
 }

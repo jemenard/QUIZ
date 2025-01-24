@@ -24,19 +24,17 @@ namespace QUIZ
 
         private void btn_valider_Click(object sender, EventArgs e)
         {
-            string result = "Bonjour ";
-            if (txt_nom.Text == "" || txt_prenom.Text == "")
+            if(txt_nom.Text != "" && txt_prenom.Text != "" && cb_difficulte.SelectedIndex != -1)
             {
-
-                MessageBox.Show("Aucun message n'est entré", "Erreur",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txt_afficher.Text = result;
+                Jeu J = new Jeu();
+                J.Show();
+                this.Hide();
             }
             else
             {
-                result += txt_prenom.Text + " " + txt_nom.Text;
-                result+= "\r\n La difficulté sélectionnée est : " + cb_difficulte.SelectedItem; ;
-                txt_afficher.Text = result;
+                MessageBox.Show("Merci de ne laisser aucun champs vide", "erreur"
+                , MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
             }
            
         }
@@ -46,7 +44,6 @@ namespace QUIZ
             if (cb_difficulte.SelectedItem == "enfer")
             {
                 this.BackColor = Color.Red;
-                lbl_rep.Font = new Font(lbl_rep.Font, FontStyle.Bold);
                 lbl_nom.Font = new Font(lbl_nom.Font, FontStyle.Bold);
                 lbl_prenom.Font = new Font(lbl_prenom.Font, FontStyle.Bold);
                 lbl_difficulte.Font = new Font(lbl_difficulte.Font, FontStyle.Bold);
@@ -54,7 +51,6 @@ namespace QUIZ
             else if(cb_difficulte.SelectedItem == "lunatic")
             {
                 this.BackColor = Color.Purple;
-                lbl_rep.Font = new Font(lbl_rep.Font, FontStyle.Bold);
                 lbl_nom.Font = new Font(lbl_nom.Font, FontStyle.Bold);
                 lbl_prenom.Font = new Font(lbl_prenom.Font, FontStyle.Bold);
                 lbl_difficulte.Font = new Font(lbl_difficulte.Font, FontStyle.Bold);
@@ -62,7 +58,6 @@ namespace QUIZ
             else
             {
                 this.BackColor = Color.FromArgb(153, 180, 209);
-                lbl_rep.Font = new Font(lbl_rep.Font, FontStyle.Regular);
                 lbl_nom.Font = new Font(lbl_nom.Font, FontStyle.Regular);
                 lbl_prenom.Font = new Font(lbl_prenom.Font, FontStyle.Regular);
                 lbl_difficulte.Font = new Font(lbl_difficulte.Font, FontStyle.Regular);
