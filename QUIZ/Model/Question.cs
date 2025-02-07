@@ -11,23 +11,19 @@ namespace QUIZ.Model
         public string enonce;
         public int reponse;
         public int difficulte;
-        public string proposition1;
-        public string proposition2;
-        public string proposition3;
-        public string proposition4;
-        public string proposition5;
+        private string[] propositions;
 
-        public Question(string enonce, int reponse, int difficulte, string proposition1, string proposition2, string proposition3, string proposition4, string proposition5)
+        public Question(string enonce, int reponse, int difficulte, string prop1, string prop2, string prop3, string prop4, string prop5)
         {
             this.enonce = enonce;
-            this.reponse = reponse; 
+            this.reponse = reponse;
             this.difficulte = difficulte;
-            this.proposition1 = proposition1;
-            this.proposition2 = proposition2;
-            this.proposition3 = proposition3;
-            this.proposition4 = proposition4;
-            this.proposition5 = proposition5;
+            this.propositions = new string[] { prop1, prop2, prop3, prop4, prop5 };
         }
 
+        public string GetProposition(int index)
+        {
+            return (index >= 1 && index <= 5) ? propositions[index - 1] : "";
+        }
     }
 }

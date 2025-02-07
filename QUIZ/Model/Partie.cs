@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,107 +27,92 @@ namespace QUIZ.Model
             nbQuestionsPartie = ListeQuestions.Count;
         }
 
-        private void calculerScore(bool reponse)
+        private void calculerScore(bool bonneReponse)
         {
-            score++;
+            if (bonneReponse) score++;
         }
-        private void changerImg(PictureBox PbImage, bool BonneReponse, bool raz)
+
+        private void changerImg(PictureBox PbImage, bool bonneReponse, bool raz)
         {
             if (!raz)
             {
-                if (BonneReponse)
-                {
-                    PbImage.Image = Properties.Resources.vrai;
-                }
-                else
-                {
-                    PbImage.Image = Properties.Resources.faux;
-                }
+                PbImage.Image = bonneReponse ? Properties.Resources.vrai : Properties.Resources.faux;
             }
         }
 
         private CheckBox getCheckBox(int indice, GroupBox gd_reponse)
         {
-            foreach (Control c in gd_reponse.Controls)
-            {
-                if (c.GetType() == typeof(CheckBox) && c.Name == "ckb_reponse" + indice.ToString())
-                {
-                    return ((CheckBox)c);
-                }
-            }
-            return null;
+            return gd_reponse.Controls.OfType<CheckBox>().FirstOrDefault(c => c.Name == "cbox_rep" + indice);
         }
 
         private void aleatoireReponse(TextBox txt_affichage, GroupBox gd_reponse)
         {
-            int bonneReponse = questions[nbQuestions].reponse;
-            txt_affichage.Text = questions[nbQuestions].enonce;
-            List<int> reponseAleatoire = new List<int>() { 1, 2, 3, 4, 5 };
+            Question question = questions[nbQuestions];
+            txt_affichage.Text = question.enonce;
+
+            List<int> indices = new List<int> { 1, 2, 3, 4, 5 };
             Random rnd = new Random();
+            indices = indices.OrderBy(x => rnd.Next()).ToList();
 
-            for (int i = 1; i <= 5; i++)
+            for (int i = 0; i < indices.Count; i++)
             {
-                int randIndex = rnd.Next(reponseAleatoire.Count);
-                int random = reponseAleatoire[randIndex];
-                reponseAleatoire.Remove(random);
-                string reponse = "";
-
-                //Réaliser un switch permettant d’affecter à
-                //reponse la proposition sélectionnée de manière aléatoire
-                switch(getCheckBox(i,gb_reponses))
+                int random = indices[i];
+                string reponse = question.GetProposition(random);
+                CheckBox checkBox = getCheckBox(i + 1, gd_reponse);
+                if (checkBox != null)
                 {
-                    case 1:
-                        reponse= questions[nbQuestions].proposition1;
-                    break;
-                    case 2:
-                        reponse = questions[nbQuestions].proposition2;
-                        break;
-                    case 3:
-                        reponse = questions[nbQuestions].proposition3;
-                        break;
-                    case 4:
-                        reponse = questions[nbQuestions].proposition4;
-                        break;
-                    case 5:
-                        reponse = questions[nbQuestions].proposition5;
-                        break;
+                    checkBox.Text = reponse;
+                    checkBox.Tag = (random == question.reponse);
                 }
-                getCheckBox(i, gd_reponse).Text = reponse;
-                if (bonneReponse == random)
+                if (random == question.reponse)
                 {
-                    nbReponse = i;
+                    nbReponse = i + 1;
                 }
             }
         }
 
         public void validerReponse(int reponse, PictureBox PbImage)
         {
-            if (reponse == nbReponse)
-            {
-                calculerScore(true);
-                changerImg(PbImage, true, false);
-            }
-            else
-            {
-                calculerScore(false);
-                changerImg(PbImage, false, false);
-            }
+            bool bonneReponse = (reponse == nbReponse);
+            calculerScore(bonneReponse);
+            changerImg(PbImage, bonneReponse, false);
         }
 
-        public void changerQuestion(TextBox txt_affichage, CheckBox ckb_reponse1, CheckBox ckb_reponse2, CheckBox ckb_reponse3, CheckBox ckb_reponse4, CheckBox ckb_reponse5, Form formulaire, GroupBox gd_reponse, PictureBox PbImage)
+        public void changerQuestion(TextBox txt_affichage, CheckBox cbox_rep1, CheckBox cbox_rep2, CheckBox cbox_rep3, CheckBox cbox_rep4, CheckBox cbox_rep5, Form formulaire, GroupBox gd_reponse, PictureBox PbImage)
         {
-            if (// On teste si il reste des questions )
-            { 
+            if (nbQuestions < nbQuestionsPartie)
+            {
                 aleatoireReponse(txt_affichage, gd_reponse);
-                // On décoche les 5 checkbox
-
+                cbox_rep1.Checked = false;
+                cbox_rep2.Checked = false;
+                cbox_rep3.Checked = false;
+                cbox_rep4.Checked = false;
+                cbox_rep5.Checked = false;
             }
             else
             {
-                //appel de la méthode de fin de partie qui sera réalisé plus tard
+                FinDePartie(txt_affichage, cbox_rep1, cbox_rep2, cbox_rep3, cbox_rep4, cbox_rep5, formulaire, gd_reponse, PbImage);
             }
         }
 
+        public void FinDePartie(TextBox txt_affichage, CheckBox cbox_rep1, CheckBox cbox_rep2, CheckBox cbox_rep3, CheckBox cbox_rep4, CheckBox cbox_rep5, Form formulaire, GroupBox gd_reponse, PictureBox PbImage)
+        {
+            DialogResult msg;
+            msg = MessageBox.Show("Votre score est de " + score + ".\r\n Voulez vous rejouer", "Fin de la partie"
+                    , MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+            if (msg == DialogResult.Yes)
+            {
+                score = 0;
+                nbQuestions = 0;
+                PbImage.Image = Properties.Resources.Interrogation;
+                changerQuestion(txt_affichage, cbox_rep1, cbox_rep2, cbox_rep3, cbox_rep4, cbox_rep5, formulaire, gd_reponse, PbImage);
+            }
+            else
+            {
+                accueil Accueil = new accueil();
+                Accueil.Show();
+                formulaire.Hide();
+            }
+        }
     }
-
 }

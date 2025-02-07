@@ -31,7 +31,7 @@
             this.lbl_titre = new System.Windows.Forms.Label();
             this.txt_question = new System.Windows.Forms.TextBox();
             this.btn_valider = new System.Windows.Forms.Button();
-            this.lbl_q1 = new System.Windows.Forms.Label();
+            this.lbl_question = new System.Windows.Forms.Label();
             this.lbl_temps = new System.Windows.Forms.Label();
             this.txt_temps = new System.Windows.Forms.TextBox();
             this.gb_reponses = new System.Windows.Forms.GroupBox();
@@ -74,16 +74,17 @@
             this.btn_valider.TabIndex = 4;
             this.btn_valider.Text = "Valider";
             this.btn_valider.UseVisualStyleBackColor = true;
+            this.btn_valider.Click += new System.EventHandler(this.btn_valider_Click);
             // 
-            // lbl_q1
+            // lbl_question
             // 
-            this.lbl_q1.AutoSize = true;
-            this.lbl_q1.Location = new System.Drawing.Point(53, 102);
-            this.lbl_q1.Name = "lbl_q1";
-            this.lbl_q1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lbl_q1.Size = new System.Drawing.Size(58, 13);
-            this.lbl_q1.TabIndex = 5;
-            this.lbl_q1.Text = "Question 1";
+            this.lbl_question.AutoSize = true;
+            this.lbl_question.Location = new System.Drawing.Point(53, 102);
+            this.lbl_question.Name = "lbl_question";
+            this.lbl_question.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lbl_question.Size = new System.Drawing.Size(58, 13);
+            this.lbl_question.TabIndex = 5;
+            this.lbl_question.Text = "Question 1";
             // 
             // lbl_temps
             // 
@@ -128,6 +129,7 @@
             this.cbox_rep5.TabIndex = 4;
             this.cbox_rep5.Text = "Réponse 5";
             this.cbox_rep5.UseVisualStyleBackColor = true;
+            this.cbox_rep5.Click += new System.EventHandler(this.check_box_Click);
             // 
             // cbox_rep4
             // 
@@ -138,6 +140,7 @@
             this.cbox_rep4.TabIndex = 3;
             this.cbox_rep4.Text = "Réponse 4";
             this.cbox_rep4.UseVisualStyleBackColor = true;
+            this.cbox_rep4.Click += new System.EventHandler(this.check_box_Click);
             // 
             // cbox_rep3
             // 
@@ -148,6 +151,7 @@
             this.cbox_rep3.TabIndex = 2;
             this.cbox_rep3.Text = "Réponse 3";
             this.cbox_rep3.UseVisualStyleBackColor = true;
+            this.cbox_rep3.Click += new System.EventHandler(this.check_box_Click);
             // 
             // cbox_rep2
             // 
@@ -158,6 +162,7 @@
             this.cbox_rep2.TabIndex = 1;
             this.cbox_rep2.Text = "Réponse 2";
             this.cbox_rep2.UseVisualStyleBackColor = true;
+            this.cbox_rep2.Click += new System.EventHandler(this.check_box_Click);
             // 
             // cbox_rep1
             // 
@@ -168,6 +173,7 @@
             this.cbox_rep1.TabIndex = 0;
             this.cbox_rep1.Text = "Réponse 1";
             this.cbox_rep1.UseVisualStyleBackColor = true;
+            this.cbox_rep1.Click += new System.EventHandler(this.check_box_Click);
             // 
             // pb_img
             // 
@@ -189,7 +195,7 @@
             this.Controls.Add(this.gb_reponses);
             this.Controls.Add(this.txt_temps);
             this.Controls.Add(this.lbl_temps);
-            this.Controls.Add(this.lbl_q1);
+            this.Controls.Add(this.lbl_question);
             this.Controls.Add(this.btn_valider);
             this.Controls.Add(this.txt_question);
             this.Controls.Add(this.lbl_titre);
@@ -208,7 +214,7 @@
         private System.Windows.Forms.Label lbl_titre;
         private System.Windows.Forms.TextBox txt_question;
         private System.Windows.Forms.Button btn_valider;
-        private System.Windows.Forms.Label lbl_q1;
+        private System.Windows.Forms.Label lbl_question;
         private System.Windows.Forms.Label lbl_temps;
         private System.Windows.Forms.TextBox txt_temps;
         private System.Windows.Forms.GroupBox gb_reponses;
