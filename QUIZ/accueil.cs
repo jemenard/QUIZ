@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QUIZ.Model;
 
 namespace QUIZ
 {
@@ -26,15 +27,18 @@ namespace QUIZ
         {
             if(txt_nom.Text != "" && txt_prenom.Text != "" && cb_difficulte.SelectedIndex != -1)
             {
-                Jeu J = new Jeu();
-                J.Show();
-                this.Hide();
+                string nom = txt_nom.Text;
+                string prenom = txt_prenom.Text;
+                string difficulte = cb_difficulte.SelectedItem.ToString();
+                Jeu J = new Jeu(nom, prenom, difficulte);
+                (System.Windows.Forms.Application.OpenForms["Menu"] as menu).openChildForm(J);
+                this.Close();
+                
             }
             else
             {
                 MessageBox.Show("Merci de ne laisser aucun champs vide", "erreur"
                 , MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
             }
            
         }
@@ -62,6 +66,11 @@ namespace QUIZ
                 lbl_prenom.Font = new Font(lbl_prenom.Font, FontStyle.Regular);
                 lbl_difficulte.Font = new Font(lbl_difficulte.Font, FontStyle.Regular);
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

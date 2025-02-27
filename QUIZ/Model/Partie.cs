@@ -11,17 +11,21 @@ namespace QUIZ.Model
 {
     public class Partie
     {
+        public string nom;
+        public string prenom;
         public int score;
-        public int difficulte;
+        public string difficulte;
         public int nbQuestionsPartie;
         public List<Question> questions;
         public int nbReponse;
         public int nbQuestions;
 
-        public Partie(List<Question> ListeQuestions)
+        public Partie(string nom, string prenom, string difficulte, List<Question> ListeQuestions)
         {
+            this.nom = nom;
+            this.prenom = prenom;
+            this.difficulte = difficulte;
             score = 0;
-            difficulte = 0;
             nbQuestions = 0;
             this.questions = ListeQuestions;
             nbQuestionsPartie = ListeQuestions.Count;
@@ -78,7 +82,7 @@ namespace QUIZ.Model
             changerImg(PbImage, bonneReponse, false);
         }
 
-        public void changerQuestion(TextBox txt_affichage, CheckBox cbox_rep1, CheckBox cbox_rep2, CheckBox cbox_rep3, CheckBox cbox_rep4, CheckBox cbox_rep5, Form formulaire, GroupBox gd_reponse, PictureBox PbImage)
+        public void changerQuestion(TextBox txt_affichage, CheckBox cbox_rep1, CheckBox cbox_rep2, CheckBox cbox_rep3, CheckBox cbox_rep4, CheckBox cbox_rep5, Form formulaire, GroupBox gd_reponse, PictureBox PbImage, TextBox txt_timer, Timer timer, ProgressBar progressBar)
         {
             if (nbQuestions < nbQuestionsPartie)
             {
@@ -88,31 +92,39 @@ namespace QUIZ.Model
                 cbox_rep3.Checked = false;
                 cbox_rep4.Checked = false;
                 cbox_rep5.Checked = false;
+                progressBar.Value = 0;
             }
             else
             {
-                FinDePartie(txt_affichage, cbox_rep1, cbox_rep2, cbox_rep3, cbox_rep4, cbox_rep5, formulaire, gd_reponse, PbImage);
+                FinDePartie(txt_affichage, cbox_rep1, cbox_rep2, cbox_rep3, cbox_rep4, cbox_rep5, formulaire, gd_reponse, PbImage, txt_timer, timer, progressBar);
             }
         }
 
-        public void FinDePartie(TextBox txt_affichage, CheckBox cbox_rep1, CheckBox cbox_rep2, CheckBox cbox_rep3, CheckBox cbox_rep4, CheckBox cbox_rep5, Form formulaire, GroupBox gd_reponse, PictureBox PbImage)
+        public void FinDePartie(TextBox txt_affichage, CheckBox cbox_rep1, CheckBox cbox_rep2, CheckBox cbox_rep3, CheckBox cbox_rep4, CheckBox cbox_rep5, Form formulaire, GroupBox gd_reponse, PictureBox PbImage, TextBox txt_timer, Timer timer, ProgressBar progressBar)
         {
+            timer.Stop();
             DialogResult msg;
-            msg = MessageBox.Show("Votre score est de " + score + ".\r\n Voulez vous rejouer", "Fin de la partie"
-                    , MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+            msg = MessageBox.Show($"Votre score est de {score}.\nTemps total : {txt_timer.Text}\n\nVoulez-vous rejouer ?",
+                    "Fin de la partie", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+
             if (msg == DialogResult.Yes)
             {
                 score = 0;
                 nbQuestions = 0;
                 PbImage.Image = Properties.Resources.Interrogation;
-                changerQuestion(txt_affichage, cbox_rep1, cbox_rep2, cbox_rep3, cbox_rep4, cbox_rep5, formulaire, gd_reponse, PbImage);
+                txt_timer.Text = "0 sec";
+                timer.Start();
+                changerQuestion(txt_affichage, cbox_rep1, cbox_rep2, cbox_rep3, cbox_rep4, cbox_rep5, formulaire, gd_reponse, PbImage, txt_timer, timer, progressBar);
             }
             else
             {
+                
                 accueil Accueil = new accueil();
                 Accueil.Show();
-                formulaire.Hide();
+                (System.Windows.Forms.Application.OpenForms["Menu"] as menu).openChildForm(Accueil);
+                formulaire.Close();
             }
-        }
+        }  
+
     }
 }

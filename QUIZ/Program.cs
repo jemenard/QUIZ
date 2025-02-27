@@ -16,7 +16,7 @@ namespace QUIZ
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new accueil());
+            Application.Run(new menu());
         }
     }
 }
