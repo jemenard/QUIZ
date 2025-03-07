@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgv_questions = new System.Windows.Forms.DataGridView();
             this.btn_close = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_questions)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgv_questions
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(23, 30);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(566, 342);
-            this.dataGridView1.TabIndex = 0;
+            this.dgv_questions.AllowUserToAddRows = false;
+            this.dgv_questions.AllowUserToDeleteRows = false;
+            this.dgv_questions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_questions.Location = new System.Drawing.Point(23, 30);
+            this.dgv_questions.Name = "dgv_questions";
+            this.dgv_questions.ReadOnly = true;
+            this.dgv_questions.Size = new System.Drawing.Size(566, 342);
+            this.dgv_questions.TabIndex = 0;
             // 
             // btn_close
             // 
@@ -53,6 +53,7 @@
             this.btn_close.TabIndex = 10;
             this.btn_close.Text = "X";
             this.btn_close.UseVisualStyleBackColor = true;
+            this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
             // 
             // affichageDonnee
             // 
@@ -61,18 +62,18 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btn_close);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgv_questions);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "affichageDonnee";
             this.Text = "affichageDonnee";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_questions)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgv_questions;
         private System.Windows.Forms.Button btn_close;
     }
 }

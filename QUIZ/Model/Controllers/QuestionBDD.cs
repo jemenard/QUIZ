@@ -15,12 +15,13 @@ namespace QUIZ.Model.Controllers
         public DataTable GetListeQuestion()
         {
             DataTable dt = new DataTable();
-            ConnectionBDD conn;
+            ConnectionBDD conn = new ConnectionBDD();
             
+
 
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand("//Votre requête SQL ici de préférence jointure + alias ", conn.MySqlCo))
+                using (MySqlCommand cmd = new MySqlCommand("SELECT IDQUESTION, ENONCEQUESTION, D.IDDIFFICULTE, LABELDIFFICULTE FROM QUESTION INNER JOIN DIFFICULTE as D on D.IDDIFFICULTE = QUESTION.IDDIFFICULTE;", conn.MySqlCo))
                 {
                     conn.MySqlCo.Open();
                     MySqlDataReader reader = cmd.ExecuteReader();
@@ -31,11 +32,11 @@ namespace QUIZ.Model.Controllers
             {
                 MessageBox.Show(e.ToString(), "Erreur 3", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign, true);
             }
+
             conn.MySqlCo.Close();
             conn.MySqlCo = null;
             return dt;
         }
-
     }
 
 }

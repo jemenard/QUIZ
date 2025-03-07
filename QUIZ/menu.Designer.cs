@@ -31,11 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.jeuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.démarrerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.démarrerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.pnl_SF = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -50,7 +50,8 @@
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(600, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -59,8 +60,34 @@
             this.jeuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.démarrerToolStripMenuItem});
             this.jeuToolStripMenuItem.Name = "jeuToolStripMenuItem";
-            this.jeuToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+            this.jeuToolStripMenuItem.Size = new System.Drawing.Size(36, 20);
             this.jeuToolStripMenuItem.Text = "Jeu";
+            // 
+            // démarrerToolStripMenuItem
+            // 
+            this.démarrerToolStripMenuItem.Name = "démarrerToolStripMenuItem";
+            this.démarrerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.démarrerToolStripMenuItem.Text = "Démarrer";
+            this.démarrerToolStripMenuItem.Click += new System.EventHandler(this.démarrerToolStripMenuItem_Click);
+            // 
+            // scoreToolStripMenuItem
+            // 
+            this.scoreToolStripMenuItem.Name = "scoreToolStripMenuItem";
+            this.scoreToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.scoreToolStripMenuItem.Text = "Score";
+            // 
+            // gestionToolStripMenuItem
+            // 
+            this.gestionToolStripMenuItem.Name = "gestionToolStripMenuItem";
+            this.gestionToolStripMenuItem.Size = new System.Drawing.Size(134, 20);
+            this.gestionToolStripMenuItem.Text = "Gestion des questions";
+            this.gestionToolStripMenuItem.Click += new System.EventHandler(this.gestionToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(24, 20);
+            this.toolStripMenuItem1.Text = "?";
             // 
             // contextMenuStrip1
             // 
@@ -68,49 +95,26 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // scoreToolStripMenuItem
-            // 
-            this.scoreToolStripMenuItem.Name = "scoreToolStripMenuItem";
-            this.scoreToolStripMenuItem.Size = new System.Drawing.Size(60, 24);
-            this.scoreToolStripMenuItem.Text = "Score";
-            // 
-            // gestionToolStripMenuItem
-            // 
-            this.gestionToolStripMenuItem.Name = "gestionToolStripMenuItem";
-            this.gestionToolStripMenuItem.Size = new System.Drawing.Size(167, 24);
-            this.gestionToolStripMenuItem.Text = "Gestion des questions";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(30, 24);
-            this.toolStripMenuItem1.Text = "?";
-            // 
-            // démarrerToolStripMenuItem
-            // 
-            this.démarrerToolStripMenuItem.Name = "démarrerToolStripMenuItem";
-            this.démarrerToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.démarrerToolStripMenuItem.Text = "Démarrer";
-            this.démarrerToolStripMenuItem.Click += new System.EventHandler(this.démarrerToolStripMenuItem_Click);
-            // 
             // pnl_SF
             // 
             this.pnl_SF.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.pnl_SF.Location = new System.Drawing.Point(0, 31);
+            this.pnl_SF.Location = new System.Drawing.Point(0, 25);
+            this.pnl_SF.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnl_SF.Name = "pnl_SF";
-            this.pnl_SF.Size = new System.Drawing.Size(800, 420);
+            this.pnl_SF.Size = new System.Drawing.Size(600, 341);
             this.pnl_SF.TabIndex = 0;
             // 
             // menu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.pnl_SF);
             this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "menu";
             this.Text = "quiz";
             this.menuStrip1.ResumeLayout(false);

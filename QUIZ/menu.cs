@@ -36,5 +36,10 @@ namespace QUIZ
         {
             openChildForm(new accueil());
         }
+
+        private void gestionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openChildForm(new affichageDonnee());
+        }
     }
 }
