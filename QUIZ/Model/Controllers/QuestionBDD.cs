@@ -21,7 +21,7 @@ namespace QUIZ.Model.Controllers
 
             try
             {
-                using (MySqlCommand cmd = new MySqlCommand("SELECT IDQUESTION, ENONCEQUESTION, D.IDDIFFICULTE, LABELDIFFICULTE FROM QUESTION INNER JOIN DIFFICULTE as D on D.IDDIFFICULTE = QUESTION.IDDIFFICULTE;", conn.MySqlCo))
+                using (MySqlCommand cmd = new MySqlCommand("SELECT IDQUESTION, ENONCEQUESTION as 'Question', D.IDDIFFICULTE, LABELDIFFICULTE as 'Difficulté' FROM QUESTION INNER JOIN DIFFICULTE as D on D.IDDIFFICULTE = QUESTION.IDDIFFICULTE;", conn.MySqlCo))
                 {
                     conn.MySqlCo.Open();
                     MySqlDataReader reader = cmd.ExecuteReader();
@@ -36,6 +36,32 @@ namespace QUIZ.Model.Controllers
             conn.MySqlCo.Close();
             conn.MySqlCo = null;
             return dt;
+        }
+        public DataTable GetListeQuestionRecherche(string rechercheMot, int difficulte)
+        {
+            string rqtSql = "SELECT IDQUESTION, ENONCEQUESTION as 'Question', D.IDDIFFICULTE, LABELDIFFICULTE as 'Difficulté' FROM QUESTION " +
+                            "INNER JOIN DIFFICULTE as D on D.IDDIFFICULTE = QUESTION.IDDIFFICULTE WHERE ENONCEQUESTION LIKE '"+ rechercheMot+"'" +
+                            "OR D.IDDIFFICULTE='"+difficulte+"';";
+            DataTable dt = new DataTable();
+            try
+            {
+                ConnectionBDD conn = new ConnectionBDD();
+                using (MySqlCommand cmd = new MySqlCommand(rqtSql, conn.MySqlCo))
+                {
+                    conn.MySqlCo.Open();
+                    cmd.Parameters.AddWithValue("@rechercheMot", rechercheMot);
+                    cmd.Parameters.AddWithValue("@difficulte", difficulte);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    dt.Load(reader);
+
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(), "Erreur 3", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign, true);
+            }
+            return dt;
+
         }
     }
 

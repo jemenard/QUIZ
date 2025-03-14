@@ -132,6 +132,7 @@
       <DependentUpon>affichageDonnee.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\ConnectionBDD.cs" />
+    <Compile Include="Model\Controllers\Difficulte.cs" />
     <Compile Include="Model\Controllers\QuestionBDD.cs" />
     <Compile Include="Model\Partie.cs" />
     <Compile Include="Model\Question.cs" />
