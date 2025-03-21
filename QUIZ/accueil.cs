@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using QUIZ.Model;
+using QUIZ.Model.Controllers;
 
 namespace QUIZ
 {
@@ -16,16 +17,15 @@ namespace QUIZ
         public accueil()
         {
             InitializeComponent();
-            cb_difficulte.Items.Add("facile");
-            cb_difficulte.Items.Add("normal");
-            cb_difficulte.Items.Add("difficile");
-            cb_difficulte.Items.Add("enfer");
-            cb_difficulte.Items.Add("lunatic");
+            Difficulte dt_ListeDifficulte = new Difficulte();
+            cb_difficulte.DataSource = dt_ListeDifficulte.GetListeDifficulte();
+            cb_difficulte.DisplayMember = "LABELDIFFICULTE"; //nom de l’alias SQL ou nom de la colonne
+            cb_difficulte.ValueMember = "IDDIFFICULTE";  //nom de l’alias SQL ou nom de la colonne
         }
 
         private void btn_valider_Click(object sender, EventArgs e)
         {
-            if(txt_nom.Text != "" && txt_prenom.Text != "" && cb_difficulte.SelectedIndex != -1)
+            if(txt_nom.Text != "" && txt_prenom.Text != "" && cb_difficulte.SelectedIndex != 0)
             {
                 string nom = txt_nom.Text;
                 string prenom = txt_prenom.Text;
@@ -45,16 +45,9 @@ namespace QUIZ
 
         private void cb_difficulte_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cb_difficulte.SelectedItem == "enfer")
+            if (cb_difficulte.SelectedIndex == 4)
             {
                 this.BackColor = Color.Red;
-                lbl_nom.Font = new Font(lbl_nom.Font, FontStyle.Bold);
-                lbl_prenom.Font = new Font(lbl_prenom.Font, FontStyle.Bold);
-                lbl_difficulte.Font = new Font(lbl_difficulte.Font, FontStyle.Bold);
-            }
-            else if(cb_difficulte.SelectedItem == "lunatic")
-            {
-                this.BackColor = Color.Purple;
                 lbl_nom.Font = new Font(lbl_nom.Font, FontStyle.Bold);
                 lbl_prenom.Font = new Font(lbl_prenom.Font, FontStyle.Bold);
                 lbl_difficulte.Font = new Font(lbl_difficulte.Font, FontStyle.Bold);

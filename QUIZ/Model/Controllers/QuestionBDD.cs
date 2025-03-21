@@ -39,9 +39,19 @@ namespace QUIZ.Model.Controllers
         }
         public DataTable GetListeQuestionRecherche(string rechercheMot, int difficulte)
         {
-            string rqtSql = "SELECT IDQUESTION, ENONCEQUESTION as 'Question', D.IDDIFFICULTE, LABELDIFFICULTE as 'Difficulté' FROM QUESTION " +
-                            "INNER JOIN DIFFICULTE as D on D.IDDIFFICULTE = QUESTION.IDDIFFICULTE WHERE ENONCEQUESTION LIKE '"+ rechercheMot+"'" +
-                            "OR D.IDDIFFICULTE='"+difficulte+"';";
+            string rqtSql;
+            if (difficulte == 0)
+            {
+                rqtSql = "SELECT IDQUESTION, ENONCEQUESTION as 'Question', D.IDDIFFICULTE, LABELDIFFICULTE as 'Difficulté' FROM QUESTION " +
+                            "INNER JOIN DIFFICULTE as D on D.IDDIFFICULTE = QUESTION.IDDIFFICULTE WHERE ENONCEQUESTION LIKE '%" + rechercheMot + "%';";
+            }
+            else
+            {
+                rqtSql = "SELECT IDQUESTION, ENONCEQUESTION as 'Question', D.IDDIFFICULTE, LABELDIFFICULTE as 'Difficulté' FROM QUESTION " +
+                            "INNER JOIN DIFFICULTE as D on D.IDDIFFICULTE = QUESTION.IDDIFFICULTE WHERE ENONCEQUESTION LIKE '%" + rechercheMot + "%'" +
+                            "AND D.IDDIFFICULTE='" + difficulte + "';";
+            }
+            
             DataTable dt = new DataTable();
             try
             {
