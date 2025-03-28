@@ -31,30 +31,7 @@ namespace QUIZ.Model
         }
         public Question(int difficulte)
         {
-            DataTable dt = new DataTable();
-            ConnectionBDD conn = new ConnectionBDD();
-            //Déclaration d'une nouvelle liste
-            List<Question> ListeQuestions = new List<Question>();
-            //… 
-            try
-            {
-                using (MySqlCommand cmd = new MySqlCommand("SELECT IDQUESTION, ENONCEQUESTION as 'Question', D.IDDIFFICULTE, LABELDIFFICULTE as 'Difficulté' FROM QUESTION INNER JOIN DIFFICULTE as D on D.IDDIFFICULTE = QUESTION.IDDIFFICULTE;", conn.MySqlCo))
-                {
-                    conn.MySqlCo.Open();
-                    MySqlDataReader reader = cmd.ExecuteReader();
-                    dt.Load(reader);
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.ToString(), "Erreur 3", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign, true);
-            }
-            //Remplir une liste avec une datatable
-            foreach (DataRow row in dt.Rows)
-            {
-                ListeQuestions.Add(new Question(row["ENONCEQUESTION"].ToString(), row["BONREPONSEQUESTION"].ToString());
-            }
-
+           
         }
     }
 }

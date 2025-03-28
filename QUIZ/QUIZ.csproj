@@ -107,10 +107,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="accueil.cs">
+    <Compile Include="view\accueil.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="accueil.Designer.cs">
+    <Compile Include="view\accueil.Designer.cs">
       <DependentUpon>accueil.cs</DependentUpon>
     </Compile>
     <Compile Include="menu.cs">
@@ -119,36 +119,36 @@
     <Compile Include="menu.Designer.cs">
       <DependentUpon>menu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Jeu.cs">
+    <Compile Include="view\Jeu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Jeu.Designer.cs">
+    <Compile Include="view\Jeu.Designer.cs">
       <DependentUpon>Jeu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\affichageDonnee.cs">
+    <Compile Include="view\affichageDonnee.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Model\affichageDonnee.Designer.cs">
+    <Compile Include="view\affichageDonnee.Designer.cs">
       <DependentUpon>affichageDonnee.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\ConnectionBDD.cs" />
-    <Compile Include="Model\Controllers\Difficulte.cs" />
-    <Compile Include="Model\Controllers\QuestionBDD.cs" />
+    <Compile Include="Controllers\Difficulte.cs" />
+    <Compile Include="Controllers\QuestionBDD.cs" />
     <Compile Include="Model\Partie.cs" />
     <Compile Include="Model\Question.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\SousFormulaire.cs" />
-    <EmbeddedResource Include="accueil.resx">
+    <EmbeddedResource Include="view\accueil.resx">
       <DependentUpon>accueil.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Jeu.resx">
+    <EmbeddedResource Include="view\Jeu.resx">
       <DependentUpon>Jeu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="menu.resx">
       <DependentUpon>menu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Model\affichageDonnee.resx">
+    <EmbeddedResource Include="view\affichageDonnee.resx">
       <DependentUpon>affichageDonnee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

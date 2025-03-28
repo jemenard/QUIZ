@@ -43,13 +43,13 @@ namespace QUIZ.Model.Controllers
             if (difficulte == 0)
             {
                 rqtSql = "SELECT IDQUESTION, ENONCEQUESTION as 'Question', D.IDDIFFICULTE, LABELDIFFICULTE as 'Difficulté' FROM QUESTION " +
-                            "INNER JOIN DIFFICULTE as D on D.IDDIFFICULTE = QUESTION.IDDIFFICULTE WHERE ENONCEQUESTION LIKE '%" + rechercheMot + "%';";
+                            "INNER JOIN DIFFICULTE as D on D.IDDIFFICULTE = QUESTION.IDDIFFICULTE WHERE ENONCEQUESTION LIKE '%" + @rechercheMot + "%';";
             }
             else
             {
                 rqtSql = "SELECT IDQUESTION, ENONCEQUESTION as 'Question', D.IDDIFFICULTE, LABELDIFFICULTE as 'Difficulté' FROM QUESTION " +
-                            "INNER JOIN DIFFICULTE as D on D.IDDIFFICULTE = QUESTION.IDDIFFICULTE WHERE ENONCEQUESTION LIKE '%" + rechercheMot + "%'" +
-                            "AND D.IDDIFFICULTE='" + difficulte + "';";
+                            "INNER JOIN DIFFICULTE as D on D.IDDIFFICULTE = QUESTION.IDDIFFICULTE WHERE ENONCEQUESTION LIKE '%" + @rechercheMot + "%'" +
+                            "AND D.IDDIFFICULTE=@difficulte;";
             }
             
             DataTable dt = new DataTable();

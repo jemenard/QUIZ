@@ -14,13 +14,14 @@ namespace QUIZ.Model
         public string nom;
         public string prenom;
         public int score;
-        public string difficulte;
+        public int difficulte;
         public int nbQuestionsPartie;
         public List<Question> questions;
+        public List<Question> listeAleatoire;
         public int nbReponse;
         public int nbQuestions;
 
-        public Partie(string nom, string prenom, string difficulte, List<Question> ListeQuestions)
+        public Partie(string nom, string prenom, int difficulte, List<Question> ListeQuestions, List<Question> listeAleatoire)
         {
             this.nom = nom;
             this.prenom = prenom;
@@ -29,6 +30,7 @@ namespace QUIZ.Model
             nbQuestions = 0;
             this.questions = ListeQuestions;
             nbQuestionsPartie = ListeQuestions.Count;
+            this.listeAleatoire = listeAleatoire;
         }
 
         private void calculerScore(bool bonneReponse)
@@ -124,7 +126,21 @@ namespace QUIZ.Model
                 (System.Windows.Forms.Application.OpenForms["Menu"] as menu).openChildForm(Accueil);
                 formulaire.Close();
             }
-        }  
+        }
+        public void listeAleatoireQuestion()
+        {
+            listeAleatoire = new List<Question>();
+            List<int> reponseAleatoire = new List<int>();
+            //Création d’un tableau contenant les valeurs représentant l’ensemble des questions
+            
+
+            Random rnd = new Random();
+            //Ajout des questions dans la liste aléatoire des questions
+            for (int i = 0;i<=10;i++)
+            { 
+                int randIndex = rnd.Next();
+            }
+        }
 
     }
 }

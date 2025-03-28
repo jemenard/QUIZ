@@ -29,7 +29,7 @@ namespace QUIZ
             {
                 string nom = txt_nom.Text;
                 string prenom = txt_prenom.Text;
-                string difficulte = cb_difficulte.SelectedItem.ToString();
+                int difficulte = cb_difficulte.SelectedIndex;
                 Jeu J = new Jeu(nom, prenom, difficulte);
                 (System.Windows.Forms.Application.OpenForms["Menu"] as menu).openChildForm(J);
                 this.Close();
