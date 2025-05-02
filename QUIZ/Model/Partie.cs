@@ -21,7 +21,7 @@ namespace QUIZ.Model
         public int nbReponse;
         public int nbQuestions;
 
-        public Partie(string nom, string prenom, int difficulte, List<Question> ListeQuestions, List<Question> listeAleatoire)
+        public Partie(string nom, string prenom, int difficulte, List<Question> ListeQuestions)
         {
             this.nom = nom;
             this.prenom = prenom;
@@ -29,8 +29,7 @@ namespace QUIZ.Model
             score = 0;
             nbQuestions = 0;
             this.questions = ListeQuestions;
-            nbQuestionsPartie = ListeQuestions.Count;
-            this.listeAleatoire = listeAleatoire;
+            nbQuestionsPartie = 10;
         }
 
         private void calculerScore(bool bonneReponse)
@@ -53,8 +52,8 @@ namespace QUIZ.Model
 
         private void aleatoireReponse(TextBox txt_affichage, GroupBox gd_reponse)
         {
-            Question question = questions[nbQuestions];
-            txt_affichage.Text = question.enonce;
+            Question listeAleatoire = questions[nbQuestions];
+            txt_affichage.Text = listeAleatoire.enonce;
 
             List<int> indices = new List<int> { 1, 2, 3, 4, 5 };
             Random rnd = new Random();
@@ -63,14 +62,14 @@ namespace QUIZ.Model
             for (int i = 0; i < indices.Count; i++)
             {
                 int random = indices[i];
-                string reponse = question.GetProposition(random);
+                string reponse = listeAleatoire.GetProposition(random);
                 CheckBox checkBox = getCheckBox(i + 1, gd_reponse);
                 if (checkBox != null)
                 {
                     checkBox.Text = reponse;
-                    checkBox.Tag = (random == question.reponse);
+                    checkBox.Tag = (random == listeAleatoire.reponse);
                 }
-                if (random == question.reponse)
+                if (random == listeAleatoire.reponse)
                 {
                     nbReponse = i + 1;
                 }
@@ -127,10 +126,10 @@ namespace QUIZ.Model
                 formulaire.Close();
             }
         }
-        public void listeAleatoireQuestion()
+        public List<Question>  listeAleatoireQuestion()
         {
             listeAleatoire = new List<Question>();
-            List<int> reponseAleatoire = new List<int>();
+            //List<int> reponseAleatoire = new List<int>();
             //Création d’un tableau contenant les valeurs représentant l’ensemble des questions
             
 
@@ -138,8 +137,17 @@ namespace QUIZ.Model
             //Ajout des questions dans la liste aléatoire des questions
             for (int i = 0;i<=10;i++)
             { 
-                int randIndex = rnd.Next();
+                int randIndex = rnd.Next(questions.Count);
+                if (listeAleatoire.Contains(questions[randIndex]))
+                {
+                    i--;
+                }
+                else
+                {
+                    listeAleatoire.Add(questions[randIndex]);
+                }
             }
+            return listeAleatoire;
         }
 
     }
