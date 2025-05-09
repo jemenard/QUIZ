@@ -30,6 +30,7 @@ namespace QUIZ.Model
             nbQuestions = 0;
             this.questions = ListeQuestions;
             nbQuestionsPartie = 10;
+            listeAleatoireQuestion();
         }
 
         private void calculerScore(bool bonneReponse)
@@ -52,8 +53,8 @@ namespace QUIZ.Model
 
         private void aleatoireReponse(TextBox txt_affichage, GroupBox gd_reponse)
         {
-            Question listeAleatoire = questions[nbQuestions];
-            txt_affichage.Text = listeAleatoire.enonce;
+            Question listeA = listeAleatoire[nbQuestions];
+            txt_affichage.Text = listeA.enonce;
 
             List<int> indices = new List<int> { 1, 2, 3, 4, 5 };
             Random rnd = new Random();
@@ -62,14 +63,14 @@ namespace QUIZ.Model
             for (int i = 0; i < indices.Count; i++)
             {
                 int random = indices[i];
-                string reponse = listeAleatoire.GetProposition(random);
+                string reponse = listeA.GetProposition(random);
                 CheckBox checkBox = getCheckBox(i + 1, gd_reponse);
                 if (checkBox != null)
                 {
                     checkBox.Text = reponse;
-                    checkBox.Tag = (random == listeAleatoire.reponse);
+                    checkBox.Tag = (random == listeA.reponse);
                 }
-                if (random == listeAleatoire.reponse)
+                if (random == listeA.reponse)
                 {
                     nbReponse = i + 1;
                 }
@@ -110,11 +111,14 @@ namespace QUIZ.Model
 
             if (msg == DialogResult.Yes)
             {
+                listeAleatoire.Clear();
+                listeAleatoireQuestion();               
                 score = 0;
                 nbQuestions = 0;
                 PbImage.Image = Properties.Resources.Interrogation;
                 txt_timer.Text = "0 sec";
                 timer.Start();
+                
                 changerQuestion(txt_affichage, cbox_rep1, cbox_rep2, cbox_rep3, cbox_rep4, cbox_rep5, formulaire, gd_reponse, PbImage, txt_timer, timer, progressBar);
             }
             else
@@ -126,28 +130,29 @@ namespace QUIZ.Model
                 formulaire.Close();
             }
         }
-        public List<Question>  listeAleatoireQuestion()
+        public void listeAleatoireQuestion()
         {
             listeAleatoire = new List<Question>();
-            //List<int> reponseAleatoire = new List<int>();
-            //Création d’un tableau contenant les valeurs représentant l’ensemble des questions
             
+            List<int> indices = new List<int>();
+
+            for (int i = 1; i < questions.Count; i++)
+            { 
+                indices.Add(i);
+            }
 
             Random rnd = new Random();
-            //Ajout des questions dans la liste aléatoire des questions
-            for (int i = 0;i<=10;i++)
-            { 
-                int randIndex = rnd.Next(questions.Count);
-                if (listeAleatoire.Contains(questions[randIndex]))
-                {
-                    i--;
-                }
-                else
-                {
-                    listeAleatoire.Add(questions[randIndex]);
-                }
-            }
-            return listeAleatoire;
+            
+
+            for (int i = 0; i <= 10; i++)
+            {
+                int randIndex = rnd.Next(indices.Count);
+                int random = indices[randIndex];
+                indices.Remove(random);
+                
+                listeAleatoire.Add(questions[random]);
+            }                
+            
         }
 
     }
